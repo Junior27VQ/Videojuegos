@@ -26,7 +26,7 @@ const data = [
         "plataforma": "PlayStation 4",
         "lanzamiento": "2018-09-07",
         "precio": 49.99,
-        "disponible": true,
+        "disponible": false,
         "progreso": 0.40
     },
     {
@@ -46,7 +46,7 @@ const data = [
         "plataforma": "Multiplataforma",
         "lanzamiento": "2015-05-19",
         "precio": 39.99,
-        "disponible": true,
+        "disponible": false,
         "progreso": 0.90
     },
     {
@@ -56,7 +56,7 @@ const data = [
         "plataforma": "Multiplataforma",
         "lanzamiento": "2020-12-10",
         "precio": 59.99,
-        "disponible": true,
+        "disponible": false,
         "progreso": 0.50
     },
     {

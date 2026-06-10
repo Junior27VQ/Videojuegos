@@ -31,7 +31,7 @@ function TablaVideojuegos({ videojuegos }) {
                 <td>${juego.precio.toFixed(2)}</td>
                 <td>
                   <span className={`status-badge ${juego.disponible ? 'yes' : 'no'}`}>
-                    {juego.disponible ? 'Sí' : 'No'}
+                    {juego.disponible ? 'Disponible ' : 'Agotado'}
                   </span>
                 </td>
                 <td className="progress-cell">
