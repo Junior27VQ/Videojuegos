@@ -1,6 +1,6 @@
 import './TablaVideojuegos.css';
 
-function TablaVideojuegos({ videojuegos }) {
+function TablaVideojuegos({ videojuegos, onEliminar, onEditar }) {
   return (
     <div className="tabla-container">
       <header className="tabla-header">
@@ -19,6 +19,7 @@ function TablaVideojuegos({ videojuegos }) {
               <th>Precio</th>
               <th>Disponible</th>
               <th>Progreso</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -37,6 +38,10 @@ function TablaVideojuegos({ videojuegos }) {
                 <td className="progress-cell">
                   <span>{(juego.progreso * 100).toFixed(0)}%</span>
                   <progress value={juego.progreso} max="1"></progress>
+                </td>
+                <td className="actions">
+                  <button className="btn btn-del" onClick={() => onEliminar(juego.id)}>Eliminar</button>
+                  <button className="btn btn-toggle" onClick={() => onEditar(juego)}>Actualizar</button>
                 </td>
               </tr>
             ))}

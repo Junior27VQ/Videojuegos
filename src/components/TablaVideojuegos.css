@@ -28,3 +28,10 @@ progress {
   background-color: #e2e8f0; 
 }
 progress::-webkit-progress-value { background: #3b82f6; border-radius: 4px; }
+
+/* Botones */
+.btn { padding: 8px 12px; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600; margin-right: 5px; transition: 0.3s; }
+.btn-del { background: #ff7675; color: white; }
+.btn-del:hover { background: #d63031; }
+.btn-toggle { background: #6e9e6a; color: white; }
+.btn-toggle:hover { background: #0d4b29; }
