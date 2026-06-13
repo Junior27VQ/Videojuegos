@@ -62,3 +62,26 @@ input, select {
 @media (max-width: 480px) {
     .vj-row { grid-template-columns: 1fr; }
 }
+
+/* Diseño del mensaje de error */
+.error-mensaje {
+    color: #ff4d4d; /* Un rojo vibrante pero legible */
+    font-size: 0.85rem; /* Tamaño ligeramente menor al del label */
+    margin-top: 5px;
+    display: block;
+    font-weight: 500;
+    
+    /* Animación solicitada en el paso 5 */
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Definición de la animación de entrada */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Opcional: Resaltar el borde del input cuando hay error */
+.vj-group input.error, .vj-group textarea.error {
+    border: 2px solid #ff4d4d;
+}

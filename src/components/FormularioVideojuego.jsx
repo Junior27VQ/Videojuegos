@@ -18,6 +18,8 @@ function FormularioVideojuego({onGuardar}) {
     const [disponible, setDisponible] = useState(false);
     const [progreso, setProgreso] = useState('');
 
+    const [errores, setErrores] = useState({});
+
     useEffect(() => {
         if(reguperarVJ){
             setTitulo(reguperarVJ.titulo);
@@ -42,7 +44,29 @@ function FormularioVideojuego({onGuardar}) {
         }
     },[reguperarVJ]);
 
-    function guardar() {
+    function validarFormulario() {
+        let erroresActivos = {};
+        if(!titulo.trim()) {
+            erroresActivos.titulo = "El titulo es obligatorio";
+        }
+        if(calificacion < 1 || calificacion > 100) {
+            erroresActivos.calificacion = "La clificacion debe estar entre 1 y 100";
+        }
+        if(descripcion.length < 10 || descripcion.length > 250) {
+            erroresActivos.descripcion = "La descripcion debe tener entre 10 y 250 caracteres";
+        }
+        return erroresActivos;
+    };
+
+    function guardar(e) {
+        e.preventDefault();
+        
+        const erroresActivos = validarFormulario();
+        if(Object.keys(erroresActivos).length > 0) {
+            setErrores(erroresActivos);
+            return;
+        }
+
         const vj = {
             id: reguperarVJ ? reguperarVJ.id : Date.now(),
             titulo: titulo,
@@ -57,7 +81,7 @@ function FormularioVideojuego({onGuardar}) {
         };
         onGuardar(vj);
         navigate("/tabla");
-    }
+    };
 
     return(
         <div className="vj-form-container">
@@ -66,7 +90,8 @@ function FormularioVideojuego({onGuardar}) {
             
             <div className="vj-group">
                 <label>Título</label>
-                <input type="text" value={titulo} onChange={(e) => setTitulo(e.target.value)}/>
+                <input type="text" className={errores.titulo ? "error" : ""} value={titulo} onChange={(e) => setTitulo(e.target.value)}/>
+                {errores.titulo && <span className="error-mensaje">{errores.titulo}</span>}
             </div>
             
             <div className="vj-row">
@@ -98,16 +123,20 @@ function FormularioVideojuego({onGuardar}) {
                     <textarea
                         minLength="10"
                         maxLength="250"
+                        className={errores.descripcion ? "error" : ""}
                         value={descripcion} onChange={(e) => setDescripcion(e.target.value)}
                     />
+                    {errores.descripcion && <span className="error-mensaje">{errores.descripcion}</span>}
                 </div>
                 <div className="vj-group">
                     <label>Calificacion de las Criticas (1-100)</label>
                     <input type="number" 
                         min="1"
                         max="100"
+                        className={errores.calificacion ? "error" : ""}
                         value={calificacion} onChange={(e) => setCalificacion(e.target.value)}
                     />
+                    {errores.calificacion && <span className="error-mensaje">{errores.calificacion}</span>}
                 </div>
             </div>
             <div className="vj-row">
