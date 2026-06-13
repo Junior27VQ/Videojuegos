@@ -12,8 +12,10 @@ function FormularioVideojuego({onGuardar}) {
     const [genero, setGenero] = useState('');
     const [plataforma, setPlataforma] = useState('');
     const [lanzamiento, setLanzamiento] = useState('');
+    const [descripcion, setDescripcion] = useState('');
+    const [calificacion, setCalificacion] = useState('');
     const [precio, setPrecio] = useState('');
-    const [disponible, setDisponible] = useState('');
+    const [disponible, setDisponible] = useState(false);
     const [progreso, setProgreso] = useState('');
 
     useEffect(() => {
@@ -22,6 +24,8 @@ function FormularioVideojuego({onGuardar}) {
             setGenero(reguperarVJ.genero);
             setPlataforma(reguperarVJ.plataforma);
             setLanzamiento(reguperarVJ.lanzamiento);
+            setDescripcion(reguperarVJ.descripcion);
+            setCalificacion(reguperarVJ.calificacion);
             setPrecio(reguperarVJ.precio);
             setDisponible(reguperarVJ.disponible);
             setProgreso(reguperarVJ.progreso);
@@ -30,6 +34,8 @@ function FormularioVideojuego({onGuardar}) {
             setGenero('');
             setPlataforma('');
             setLanzamiento('');
+            setDescripcion('');
+            setCalificacion('');
             setPrecio('');
             setDisponible('');
             setProgreso('');
@@ -43,6 +49,8 @@ function FormularioVideojuego({onGuardar}) {
             genero: genero,
             plataforma: plataforma,
             lanzamiento: lanzamiento,
+            descripcion: descripcion,
+            calificacion: calificacion,
             precio: parseInt(precio),
             disponible: disponible,
             progreso: progreso
@@ -77,12 +85,31 @@ function FormularioVideojuego({onGuardar}) {
                     </select>
                 </div>
             </div>
-
             <div className="vj-group">
-                <label>Lanzamiento</label>
-                <input type="date" value={lanzamiento} onChange={(e) => setLanzamiento(e.target.value)}/>
+                <label>Fecha de Lanzamiento</label>
+                <input type="date" 
+                    max={new Date().toISOString().split("T")[0]}
+                    value={lanzamiento} onChange={(e) => setLanzamiento(e.target.value)}
+                />
             </div>
-
+            <div className="vj-row">
+                <div className="vj-group">
+                    <label>Descripcion</label>
+                    <textarea
+                        minLength="10"
+                        maxLength="250"
+                        value={descripcion} onChange={(e) => setDescripcion(e.target.value)}
+                    />
+                </div>
+                <div className="vj-group">
+                    <label>Calificacion de las Criticas (1-100)</label>
+                    <input type="number" 
+                        min="1"
+                        max="100"
+                        value={calificacion} onChange={(e) => setCalificacion(e.target.value)}
+                    />
+                </div>
+            </div>
             <div className="vj-row">
                 <div className="vj-group">
                     <label>Precio ($)</label>
@@ -93,7 +120,6 @@ function FormularioVideojuego({onGuardar}) {
                     <input type="number" value={progreso} onChange={(e) => setProgreso(e.target.value)}/>
                 </div>
             </div>
-
             <div className="vj-checkbox">
                 <input type="checkbox" id="disponible" checked={disponible} onChange={(e) => setDisponible(e.target.checked)}/>
                 <label htmlFor="disponible">Disponible en biblioteca</label>
