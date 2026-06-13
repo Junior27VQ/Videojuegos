@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
@@ -11,7 +11,14 @@ import Navbar from './components/Navbar.jsx'
 import PaginaNoEncontrada from './components/PaginaNoEncontrada.jsx'
 
 function App() {
-  const [videojuegos, setVideojuegos] = useState(data)
+  const [videojuegos, setVideojuegos] = useState(() => {
+    const datosGuardados = localStorage.getItem("lista_videojuegos");
+    return datosGuardados ? JSON.parse(datosGuardados) : [];
+  })
+
+  useEffect(() => {
+    localStorage.setItem("lista_videojuegos", JSON.stringify(videojuegos));
+  }, [videojuegos]);
   
   function nuevoVJ(nuevoVJ) {
     setVideojuegos([...videojuegos, nuevoVJ]);
