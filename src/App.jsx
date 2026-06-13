@@ -9,6 +9,7 @@ import FormularioVideojuego from './components/FormularioVideojuego.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import PaginaNoEncontrada from './components/PaginaNoEncontrada.jsx'
+import AlertaNotificacion from './components/AlertaNotificacion.jsx'
 
 function App() {
   const [videojuegos, setVideojuegos] = useState(() => {
@@ -20,12 +21,18 @@ function App() {
     localStorage.setItem("lista_videojuegos", JSON.stringify(videojuegos));
   }, [videojuegos]);
   
+  const [alerta, setAlerta] = useState(null);
+  function mostrarAlerta(msg) {
+    setAlerta(msg);
+  };
+
   function nuevoVJ(nuevoVJ) {
     setVideojuegos([...videojuegos, nuevoVJ]);
   }
 
   function eliminarVJ(id) {
     setVideojuegos(videojuegos.filter(vj => vj.id !== id));
+    mostrarAlerta("Videojuego eliminado correctamente");
   }
 
   function actualizarVJ(id, videojuego) {
@@ -37,15 +44,18 @@ function App() {
   function manejarGuardar(videojuego) {
     const existe = videojuegos.find(e => e.id === videojuego.id);
     if(existe) {
-      actualizarVJ(videojuego.id, videojuego)
+      actualizarVJ(videojuego.id, videojuego);
+      mostrarAlerta("Videojuego actualizado con exito");
     }else{
-      nuevoVJ(videojuego)
+      nuevoVJ(videojuego);
+      mostrarAlerta("Videojuego registrado con exito");
     }
   };
 
   return (
     <BrowserRouter>
       <Navbar />
+      {alerta && <AlertaNotificacion mensaje={alerta} onClose={() => setAlerta(null)} />}
       <Routes>
         <Route path="/tabla" element={
           <TablaVideojuegos 

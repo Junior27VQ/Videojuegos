@@ -26,10 +26,10 @@
 
 h2 { margin-bottom: 1.5rem; text-align: center; color: var(--accent); }
 
-.vj-group { margin-bottom: 1rem; display: flex; flex-direction: column; }
+
 .vj-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 
-label { font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; }
+
 
 input, select {
     padding: 12px;
@@ -43,45 +43,57 @@ input, select {
 .vj-checkbox { display: flex; align-items: center; gap: 10px; margin: 15px 0; }
 .vj-checkbox input { width: 20px; height: 20px; }
 
-.vj-btn {
-    width: 100%;
-    padding: 14px;
-    background: var(--accent);
-    color: var(--bg-dark);
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: transform 0.2s, background 0.2s;
-}
-
-.vj-btn:hover { background: #06b6d4; transform: translateY(-2px); }
-
 /* Responsivo */
 @media (max-width: 480px) {
     .vj-row { grid-template-columns: 1fr; }
 }
 
-/* Diseño del mensaje de error */
+/* Estilo general para el contenedor de error */
 .error-mensaje {
-    color: #ff4d4d; /* Un rojo vibrante pero legible */
-    font-size: 0.85rem; /* Tamaño ligeramente menor al del label */
-    margin-top: 5px;
+    color: #ff4d4d;
+    font-size: 0.75rem;
+    margin-top: 4px;
     display: block;
-    font-weight: 500;
-    
-    /* Animación solicitada en el paso 5 */
-    animation: fadeIn 0.4s ease-in-out;
+    font-weight: bold;
+    animation: fadeIn 0.3s ease-in;
 }
 
-/* Definición de la animación de entrada */
+/* Animación para que los mensajes aparezcan suavemente */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Opcional: Resaltar el borde del input cuando hay error */
-.vj-group input.error, .vj-group textarea.error {
-    border: 2px solid #ff4d4d;
+/* Borde rojo para inputs con error */
+.vj-group input.error, 
+.vj-group textarea.error {
+    border: 2px solid #ff4d4d !important;
+    background-color: #5f5353;
+}
+
+/* Mejora estética para los grupos de formulario */
+.vj-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.vj-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #ecd2d2;
+}
+
+.vj-btn {
+    background-color: #007bff;
+    color: rgb(235, 213, 213);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.vj-btn:hover {
+    background-color: #0056b3;
 }
