@@ -1,6 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import './TablaVideojuegos.css';
 
 function TablaVideojuegos({ videojuegos, onEliminar, onEditar }) {
+  const navigate = useNavigate();
+
+  function navigarNuevo(vj) {
+    navigate('/editar', { state: {videojuego: vj}});
+  };
+
   return (
     <div className="tabla-container">
       <header className="tabla-header">
@@ -41,7 +48,7 @@ function TablaVideojuegos({ videojuegos, onEliminar, onEditar }) {
                 </td>
                 <td className="actions">
                   <button className="btn btn-del" onClick={() => onEliminar(juego.id)}>Eliminar</button>
-                  <button className="btn btn-toggle" onClick={() => onEditar(juego)}>Actualizar</button>
+                  <button className="btn btn-toggle" onClick={() => navigarNuevo(juego)}>Actualizar</button>
                 </td>
               </tr>
             ))}

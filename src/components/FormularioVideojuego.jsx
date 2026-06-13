@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import './FormularioVideojuego.css';
 
 function FormularioVideojuego({onGuardar}) {
     const location = useLocation();
+    const navigate = useNavigate();
 
     const reguperarVJ = location.state?.videojuego || null;
 
@@ -45,50 +47,61 @@ function FormularioVideojuego({onGuardar}) {
             disponible: disponible,
             progreso: progreso
         };
-        onGuardar(videojuego);
+        onGuardar(vj);
+        navigate("/tabla");
     }
 
     return(
-        <div>
-            <h2></h2>
-            <div>
-                <label>Titulo</label>
+        <div className="vj-form-container">
+        <div className="vj-card">
+            <h2>{reguperarVJ ? "Editar Videojuego" : "Nuevo Videojuego"}</h2>
+            
+            <div className="vj-group">
+                <label>Título</label>
                 <input type="text" value={titulo} onChange={(e) => setTitulo(e.target.value)}/>
             </div>
-            <div>
-                <label>Genero</label>
-                <input type="text" value={genero} onChange={(e) => setGenero(e.target.value)}/>
+            
+            <div className="vj-row">
+                <div className="vj-group">
+                    <label>Género</label>
+                    <input type="text" value={genero} onChange={(e) => setGenero(e.target.value)}/>
+                </div>
+                <div className="vj-group">
+                    <label>Plataforma</label>
+                    <select value={plataforma} onChange={(e) => setPlataforma(e.target.value)}>
+                        <option value="">Seleccionar...</option>
+                        <option value="PlayStation 4">PlayStation 4</option>
+                        <option value="Multiplataforma">Multiplataforma</option>
+                        <option value="PC">PC</option>
+                        <option value="Nintendo Switch">Nintendo Switch</option>
+                    </select>
+                </div>
             </div>
-            <div>
-                <label>Plataforma:</label>
-                <select value={plataforma} onChange={(e) => setPlataforma(e.target.value)}>
-                    <option value="">Seleccionar...</option>
-                    <option value="PlayStation 4">PlayStation 4</option>
-                    <option value="Multiplataforma">Multiplataforma</option>
-                    <option value="PC">PC</option>
-                    <option value="Nintendo Switch">Nintendo Switch</option>
-                </select>
+
+            <div className="vj-group">
+                <label>Lanzamiento</label>
+                <input type="date" value={lanzamiento} onChange={(e) => setLanzamiento(e.target.value)}/>
             </div>
-            <div>
-                <label>Lanzamiento:</label>
-                    <input type="date" value={lanzamiento} onChange={(e) => setLanzamiento(e.target.value)}/>
+
+            <div className="vj-row">
+                <div className="vj-group">
+                    <label>Precio ($)</label>
+                    <input type="number" value={precio} onChange={(e) => setPrecio(e.target.value)}/>
+                </div>
+                <div className="vj-group">
+                    <label>Progreso (%)</label>
+                    <input type="number" value={progreso} onChange={(e) => setProgreso(e.target.value)}/>
+                </div>
             </div>
-            <div>
-                <label>Precio</label>
-                <input type="number" value={precio} onChange={(e) => setPrecio(e.target.value)}/>
+
+            <div className="vj-checkbox">
+                <input type="checkbox" id="disponible" checked={disponible} onChange={(e) => setDisponible(e.target.checked)}/>
+                <label htmlFor="disponible">Disponible en biblioteca</label>
             </div>
-            <div>
-                <label>Estado:</label>
-                <input type="checkbox" checked={disponible} onChange={(e) => setDisponible(e.target.checked)}/>
-            </div>
-            <div>
-                <label>Progreso:</label>
-                <input type="number" value={progreso} onChange={(e) => setProgreso(e.target.value)}/>
-            </div>
-            <div>
-                <button onClick={guardar}>Guardar</button>
-            </div>
+
+            <button className="vj-btn" onClick={guardar}>Guardar Registro</button>
         </div>
+    </div>
     )
 }
 export default FormularioVideojuego;

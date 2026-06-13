@@ -1,48 +1,43 @@
-/* Navbar Contenedor */
 .navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Esto separa el logo y los links */
     align-items: center;
-    padding: 1rem 2rem;
-    background-color: #1e293b; /* Azul muy oscuro */
-    color: white;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    padding: 1rem 3rem;
+    background-color: #0f172a; /* Mismo fondo de la tabla */
+    border-bottom: 3px solid #22d3ee; /* Borde inferior cian */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .navbar-logo {
-    font-size: 1.25rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
     font-weight: bold;
-    letter-spacing: 0.5px;
+    color: #ffffff;
+    letter-spacing: 2px;
 }
 
-/* Enlaces */
 .navbar-links {
     display: flex;
-    gap: 20px;
+    gap: 2rem;
 }
 
 .nav-link {
-    color: #cbd5e1;
+    font-family: 'Roboto', sans-serif;
+    color: #94a3b8; /* Gris suave */
     text-decoration: none;
-    font-weight: 500;
+    font-size: 1.1rem;
     transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-    color: #ffffff;
+    color: #22d3ee; /* Color acento al pasar el mouse */
 }
 
-/* Responsividad: Se adapta en pantallas menores a 600px */
+/* Diseño Responsivo */
 @media (max-width: 600px) {
     .navbar {
         flex-direction: column;
-        gap: 15px;
-        text-align: center;
-    }
-    
-    .navbar-links {
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
+        gap: 1rem;
+        padding: 1rem;
     }
 }
